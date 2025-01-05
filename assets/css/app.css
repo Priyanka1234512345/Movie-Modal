@@ -83,10 +83,7 @@ body::after{
     right: 0;
     background: var(--primary-color);
     padding: 20px;
-    color: antiquewhite;
-}
-.rating{
-    font-size: 1.5rem;
+    color: red;
 }
 .overView{
     position: absolute;
@@ -97,9 +94,9 @@ body::after{
     padding: 20px;
     top: 30%;
     transform: scale(0);
-    transition: all 3s ease-in-out;
+    transition: all 3s linear;
 }
-.movieCrd:is(:hover,:focus,:active).overView{
+.card:is(:hover,:focus,:active) .overView{
     transform: scale(1);
 }
 .movieContainer{

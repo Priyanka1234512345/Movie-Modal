@@ -14,7 +14,7 @@ const movieContainer = document.getElementById('movieContainer');
 let moviesArr = [
     {
         movieTitle: 'Love Story',
-        imgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEqCeKLTn-QPqI7oheo0Fu_RUpwMU0nKy8tnPOo8c-0sYV_2fgu7T90yepr5SitYx-_-NY',
+        imgUrl: 'https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg',
         rating: '5',
         OverView: 'A Christian Zumba instructor falls in love with a starry-eyed upper caste Hindu girl. In their quest for happiness, however, they must first overcome a massive caste divide',
         movieId: '"82ba8f7b-0fb7-407a-0408-9608dd323c58"'
@@ -26,25 +26,23 @@ const templatingOffMovieCrds = (arr) => {
     let result = '';
     arr.forEach(movie => {
         result += `
-         <div class="col-md-3">
- <div class="card">
+ <div class="col-md-3">
+    <div class="card">
      <figure class="movieCrd">
-         <!-- img -->
-          <img src="${movie.imgUrl}" alt="${movie.movieTitle}">
+          <img src="${movie.imgUrl}" alt=${movie.movieTitle}>
          <figcaption>
-          <!-- content -->
            <div class="titleInfo">
              <div class="row">
                  <div class="col-10">
-                     <h4>"${movie.movieTitle}"</h4>
+                     <h4>${movie.movieTitle}</h4>
                  </div>
                  <div class="col-2">
-                     <span class="rating">"${movie.rating}"</span>
+                     <span class="${setClassRating( movie.rating)}">${movie.rating}</span>
                  </div>
              </div>
            </div>
            <div class="overView">
-              <h5>Antjdjjdsjfd</h5>
+              <h5>Movie Modal Test</h5>
               <p>="${movie.OverView}"</p>
            </div>
          </figcaption>
@@ -58,6 +56,7 @@ const templatingOffMovieCrds = (arr) => {
 }
 templatingOffMovieCrds(moviesArr)
 
+
 const generateUuid = () => {
     return (
         String('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx')
@@ -66,9 +65,18 @@ const generateUuid = () => {
         const value = character === "x" ? random : (random & 0 * 3) | 0 * 8;
         return value.toString(16);
     });
-
 }
 
+function setClassRating(rating) {
+    if (rating <= 2) {
+      return "bg-danger";
+    } else if (rating > 3 && rating < 4) {
+      return "bg-warning";
+    } else {
+      return "bg-success";
+    }
+  }
+  
 const movieModalHandler = () => {
     backdrop.classList.toggle('active')
     movieModal.classList.toggle('active')
@@ -94,7 +102,7 @@ const onMovieAdd = (eve) => {
     movieForm.reset()
     //we will show in UI
     templatingOffMovieCrds(moviesArr)
-    
+
     movieModalHandler();
 }
 showModalBtn.addEventListener('click', movieModalHandler);
